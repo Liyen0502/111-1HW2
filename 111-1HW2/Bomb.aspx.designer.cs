@@ -22,5 +22,5 @@ namespace _111_1HW2
         /// 若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-    }
+    } 
 }
