@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Bomb.aspx.cs" Inherits="_111_1HW2.Bomb" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Bomb.aspx.cs" Inherits="_111_1QZ1.Bomb" %>
 
 <!DOCTYPE html>
 
