@@ -9,126 +9,29 @@ namespace _111_1HW2
 {
     public partial class Bomb : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        public partial class Bomb : System.Web.UI.Page
         {
-            //第二種寫法for
-            //填入0
-            int[] ia_Mlndex = new int[10] { 0, 7, 13, 28, 44, 62, 74, 75, 87, 90 };
-            char[,] ca_Map = new char[10, 10];
-            for (int i_Row = 0; i_Row < 10; i_Row++)
+            protected void Page_Load(object sender, EventArgs e)
             {
-                for (int i_Col = 0; i_Col < 10; i_Col++)
-                {
-                    ca_Map[i_Row, i_Col] = '0';
-                }
-            }
-            //填入*
-            for (int i_Ct = 0; i_Ct < ia_Mlndex.Length; i_Ct++)
-            {
-                int i_Row = ia_Mlndex[i_Ct] / 10; //0
-                int i_Col = ia_Mlndex[i_Ct] % 10; //0
-                ca_Map[i_Row, i_Col] = '*';
-                //Response.Write(ca_Map[i_Row, i_Col]);
-            }
-            //訪問*周邊
-            for (int i_Ct = 0; i_Ct < ia_Mlndex.Length; i_Ct++)
-            {
-                int i_Row = ia_Mlndex[i_Ct] / 10; //0
-                int i_Col = ia_Mlndex[i_Ct] % 10; //0
-                //左上
-                if ((i_Row - 1) >= 0 && (i_Col - 1) >= 0)
-                {
-                    if (ca_Map[i_Row - 1, i_Col - 1] != '*')
-                    {
-                        int i_Num = Convert.ToInt32(ca_Map[i_Row - 1, i_Col - 1]);
-                        i_Num++;
-                        ca_Map[i_Row - 1, i_Col - 1] = Convert.ToChar(i_Num);
-                    }
-                }
-                //上
-                if ((i_Row - 1) >= 0)
-                {
-                    if (ca_Map[i_Row - 1, i_Col] != '*')
-                    {
-                        int i_Num = Convert.ToInt32(ca_Map[i_Row - 1, i_Col]);
-                        i_Num++;
-                        ca_Map[i_Row - 1, i_Col] = Convert.ToChar(i_Num);
-                    }
-                }
-                //右上
-                if ((i_Row - 1) >= 0 && (i_Col + 1) < 10)
-                {
-                    if (ca_Map[i_Row - 1, i_Col + 1] != '*')
-                    {
-                        int i_Num = Convert.ToInt32(ca_Map[i_Row - 1, i_Col + 1]);
-                        i_Num++;
-                        ca_Map[i_Row - 1, i_Col + 1] = Convert.ToChar(i_Num);
-                    }
-                }
-                //左
-                if ((i_Col - 1) >= 0)
-                {
-                    if (ca_Map[i_Row, i_Col - 1] != '*')
-                    {
-                        int i_Num = Convert.ToInt32(ca_Map[i_Row, i_Col - 1]);
-                        i_Num++;
-                        ca_Map[i_Row, i_Col - 1] = Convert.ToChar(i_Num);
-                    }
-                }
+                string[,] ia_Map = new string[10, 10];
+                int[] ia_MIndex = new int[10] { 0, 7, 13, 28, 44, 62, 74, 75, 87, 90 };
 
-                //右
-                if ((i_Col + 1) < 10)
+                for (int Q = 0; Q < ia_MIndex.Length; Q++)
                 {
-                    if (ca_Map[i_Row, i_Col + 1] != '*')
-                    {
-                        int i_Num = Convert.ToInt32(ca_Map[i_Row, i_Col + 1]);
-                        i_Num++;
-                        ca_Map[i_Row, i_Col + 1] = Convert.ToChar(i_Num);
-                    }
-                }
+                    int X = ia_MIndex[Q] / ia_MIndex.Length;
+                    int Y = ia_MIndex[Q] % ia_MIndex.Length;
+                    ia_Map[X, Y] = "*";
 
-                //左下
-                if ((i_Row + 1) < 10 && (i_Col - 1) >= 0)
-                {
-                    if (ca_Map[i_Row + 1, i_Col - 1] != '*')
-                    {
-                        int i_Num = Convert.ToInt32(ca_Map[i_Row + 1, i_Col - 1]);
-                        i_Num++;
-                        ca_Map[i_Row + 1, i_Col - 1] = Convert.ToChar(i_Num);
-                    }
                 }
-                //下
-                if ((i_Row + 1) < 10)
+                for (int R = 0; R < ia_Map.GetLength(0); R++)
                 {
-                    if (ca_Map[i_Row + 1, i_Col] != '*')
+                    for (int E = 1; E < ia_Map.GetLength(1); E++)
                     {
-                        int i_Num = Convert.ToInt32(ca_Map[i_Row + 1, i_Col]);
-                        i_Num++;
-                        ca_Map[i_Row + 1, i_Col] = Convert.ToChar(i_Num);
+                        if (ia_Map[R, E] != "*") ia_Map[R, E] = "?";
+                        Response.Write(ia_Map[R, E] + "  ");
                     }
-                }
-                //右下
-                if ((i_Row + 1) < 10 && (i_Col + 1) < 10)
-                {
-                    if (ca_Map[i_Row + 1, i_Col + 1] != '*')
-                    {
-                        int i_Num = Convert.ToInt32(ca_Map[i_Row + 1, i_Col + 1]);
-                        i_Num++;
-                        ca_Map[i_Row + 1, i_Col + 1] = Convert.ToChar(i_Num);
-                    }
+                    Response.Write("<br>");
                 }
             }
-            //最後訪問全部的陣列
-            for (int i_Row = 0; i_Row < 10; i_Row++)
-            {
-                for (int i_Col = 0; i_Col < 10; i_Col++)
-                {
-                    Response.Write(ca_Map[i_Row, i_Col]);
-                }
-                Response.Write("<br />");
-            }
-            //Response.Write(ca_Map[7, 4]);
-            //Response.Write(ca_Map[7, 5]);
         }
     }
-}
